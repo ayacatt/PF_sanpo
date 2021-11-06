@@ -3,8 +3,12 @@ Rails.application.routes.draw do
   scope module: :user do
     root to: "homes#top"
     get "/about" => "homes#about"
+    resources :posts, only: [:new, :create, :index, :show, :destroy] do
+     resources :post_comments, only: [:create, :destroy]
+    end
   
   end 
+  
   
 # 顧客用
 # URL /customers/sign_in ...
