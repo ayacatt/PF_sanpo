@@ -2,6 +2,11 @@
   <%= attachment_image_tag @post, :image %>
   <p>スポット名：<%= @post.title %></p>
   <p>説明：<%= @post.body %></p>
+  <p>地図</p>
+  <div class="show__address">
+  <%= @post.spot.address %>
+  </div>
+  <div class="show__maps" id="show_map" style="height: 320px; width: 400px;"></div>
   <p>ユーザーネーム：<%= @post.user.name %></p>
   <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
   <% if @post.user == current_user %>
