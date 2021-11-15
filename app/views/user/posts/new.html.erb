@@ -4,6 +4,12 @@
   <%= f.text_field :title %>
   <h4>説明</h4>
   <%= f.text_area :body %>
+  
+  <h4>画像</h4>
+  <%= f.attachment_field :image %>
+  <%= attachment_image_tag post, :post_image, :fill, 60, 60 , fallback: "no_image.jpg" %>
+  <label for="inputImage">投稿画像</label>
+  <%= f.attachment_field :post_image, placeholder: "投稿画像" %>
 
   <h4>地図</h4>
     <div class="spot">
@@ -15,7 +21,5 @@
     <div class="map" id="map" style="height: 320px; width: 640px;"></div>
   　</div>
 
-  <h4>画像</h4>
-  <%= f.attachment_field :image %>
-  <%= f.submit '投稿' %>
+  <%= f.submit "変更を保存" %>
 <% end %>

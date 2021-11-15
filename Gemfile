@@ -74,6 +74,7 @@ gem 'dotenv-rails'
 gem "gmaps4rails"
 gem "geocoder"
 gem "gon"
+gem 'font-awesome-sass', '~> 5.13'
 group :production do
   gem 'mysql2'
 end
