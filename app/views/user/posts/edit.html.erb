@@ -2,8 +2,13 @@
 <%= form_with model:@post, local:true do |f| %>
   <label for="title">スポット名</label>
   <%= f.text_field :title, autofocus: true, id:"inputTitle", placeholder:"スポット名"%>
-  <label for="title">説明</label>
+  <label for="body">説明</label>
   <%= f.text_field :body, autofocus: true, id:"inputBody", placeholder:"説明"%>
+  <div id="evaluate_stars">
+  <label>評価</label>
+  </div>
+  <div class="actions">
+
 
   <div class="spot">
     <%= f.fields_for :spot do |s| %>
@@ -21,3 +26,13 @@
     <%= f.submit "変更を保存" %>
   </div>
 <% end %>
+
+
+<script>
+  $('#evaluate_stars').raty({
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    scoreName: 'post[evaluation]' //登録するモデル名とカラム名を記述
+  });
+</script>

@@ -1,5 +1,9 @@
 let map //変数の定義
 let geocoder //変数の定義
+let marker = []; // マーカーを複数表示させたいので、配列化
+let infoWindow = []; // 吹き出しを複数表示させたいので、配列化
+const spots = gon.all_spots; // コントローラーで定義したインスタンス変数を変数に代入
+const posts = gon.selected_posts
 
 function initMap(){ //コールバック関数
   geocoder = new google.maps.Geocoder() //GoogleMapsAPIジオコーディングサービスにアクセス
@@ -8,6 +12,45 @@ function initMap(){ //コールバック関数
       center: {lat: 35.6594666, lng: 139.7005536}, //最初に表示する場所（今回は「渋谷スクランブル交差点」が初期値）
       zoom: 15, //拡大率（1〜21まで設定可能）
     });
+  }else if(document.getElementById('top_map')){
+    // mapの初期位置設定
+    map = new google.maps.Map(document.getElementById('top_map'), {
+      center: {lat: -35.6809591, lng: 139.7673068},
+      zoom: 10
+    });
+    // forは繰り返し処理
+    // 変数iを0と定義し、
+    // その後gonで定義したspots分繰り返し加える処理を行う
+    for (let i = 0; i < spots.length; i++) {
+        // geocoderで addressの経緯緯度取得
+        // spots[i]は変数iのユーザーを取得している
+        geocoder.geocode( { 'address': spots[i].address }, function(results, status) {
+            // statusがOKであれば
+        if (status == 'OK') {
+    　　　　// map.setCenterで地図が移動
+            map.setCenter({lat: 35.6594666, lng: 139.7005536});
+            marker[i] = new google.maps.Marker({
+                map: map,
+                position: {lat: spots[i].latitude, lng: spots[i].longitude}
+            });
+            // 変数iを変数idに代入
+            let id = posts[i]['id']
+            // infoWindowは吹き出し
+            infoWindow[i] = new google.maps.InfoWindow({
+            // contentで中身を指定
+            // 今回は文字にリンクを貼り付けた形で表示
+            content: `<a href='/posts/${id}'>${posts[i].title}</a>`
+            });
+            // markerがクリックされた時、
+            marker[i].addListener("click", function(){
+                // infoWindowを表示
+                infoWindow[i].open(map, marker[i]);
+            });
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+        });
+    }
   }else{ //'map'というidが無かった場合
     map = new google.maps.Map(document.getElementById('show_map'), { //'show_map'というidを取得してマップを表示
       center: {lat: gon.lat, lng: gon.lng}, //controllerで定義した変数を緯度・経度の値とする（値はDBに入っている）
@@ -42,3 +85,5 @@ function codeAddress(){ //コールバック関数
     }
   });
 }
+
+

@@ -18,6 +18,7 @@
         <th>スポット名</th>
         <th>説明</th>
         <th>コメント件数</th>
+        <th>いいね件数</th>
       </tr>
     </thead>
 
@@ -30,7 +31,7 @@
       <td><%= post.title %></td>
       <td><%= post.body %></td>
       <td><%= post.post_comments.count %></td>
-    
+      <td class="favorite-btn-<%= post.id %>"><%= render "user/favorites/favorite-btn", post: post %></td>
     </tr>
     <% end %>
   <%= paginate @posts %>

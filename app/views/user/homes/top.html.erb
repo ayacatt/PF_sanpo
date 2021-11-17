@@ -1,1 +1,48 @@
-<h1>トップページ</h1>
+<div class="container">
+  <div class='row'>
+    <div class="col-lg-12">
+      <h1>トップページ</h1>
+      <div class='col-md-6 offset-md-3 mt-5 h5 '>新着投稿</div>
+    </div>
+  </div>
+  <div class='row'>
+    <div class="col-lg-12">
+      <table class="table table-borderless ml-4">
+        <% @posts.each do |post| %>
+          <tr><td>
+            <%= link_to post_path(post.id) do %>
+              <%= attachment_image_tag post, :image, format: 'jpg' , fallback: "no_image.jpg", size: "200x180" %>
+            <% end %>
+          </td></tr>
+          <tr><td>スポット名：<%= post.title %></td></tr>
+          <tr><td>説明：<%= post.body %></td></tr>
+          <tr><td>評価</td></tr>
+          <tr><td><div class="post-evaluation" data-score="<%= post.evaluation %>"></div></td></tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div id='top_map'></div>
+    </div>
+  </div>
+</div>
+
+<style>
+#top_map{
+    height: 500px;
+    width: 530px;
+}
+</style>
+
+
+<script>
+  $('.post-evaluation').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>

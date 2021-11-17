@@ -1,15 +1,18 @@
+<div class="col-md-8 offset-md-1">
 <h1>スポット投稿フォーム</h1>
 <%= form_with model: @post, local:true, multipart: true do |f| %>
   <h4>スポット名</h4>
   <%= f.text_field :title %>
   <h4>説明</h4>
   <%= f.text_area :body %>
-  
-  <h4>画像</h4>
+
+  <div id="evaluate_stars">
+  <label>評価</label>
+  </div>
+
+  <h4>スポット画像</h4>
   <%= f.attachment_field :image %>
-  <%= attachment_image_tag post, :post_image, :fill, 60, 60 , fallback: "no_image.jpg" %>
-  <label for="inputImage">投稿画像</label>
-  <%= f.attachment_field :post_image, placeholder: "投稿画像" %>
+  <%= attachment_image_tag @post, :image, :fill, 60, 60 , fallback: "no_image.jpg" %>
 
   <h4>地図</h4>
     <div class="spot">
@@ -21,5 +24,14 @@
     <div class="map" id="map" style="height: 320px; width: 640px;"></div>
   　</div>
 
-  <%= f.submit "変更を保存" %>
+  <%= f.submit "投稿する" %>
 <% end %>
+
+<script>
+  $('#evaluate_stars').raty({
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    scoreName: 'post[evaluation]' //登録するモデル名とカラム名を記述
+  });
+</script>

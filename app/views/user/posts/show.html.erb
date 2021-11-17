@@ -1,39 +1,77 @@
-<div>
-  <p>ユーザーネーム：<%= @post.user.name %></p>
-  <p><%= attachment_image_tag @post.user, :profile_image, :fill, 60, 60 , fallback: "no_image.jpg" %></p>
-  
-  <p>スポット名：<%= @post.title %></p>
-  <p>説明：<%= @post.body %></p>
-  <p>投稿画像：<%= attachment_image_tag @post, :image, :fill, 60, 60 , fallback: "no_image.jpg" %></p>
-  <p>地図</p>
-  <div class="show__address"></div>
-  <div class="show__maps" id="show_map" style="height: 320px; width: 400px;"></div>
-  <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @post.user == current_user %>
-  <%= link_to "編集", edit_post_path(@post) %>
-  <%= link_to "削除", post_path(@post), method: :delete %>
-  <% end %>
-</div>
+ <div class="container px-5 px-sm-5">
+    <div class="row">
+      <div class="col-md-4">
 
-<div>
-<p>コメント件数：<%= @post.post_comments.count %></p>
-　<% @post.post_comments.each do |post_comment| %>
-  <p><%= attachment_image_tag @post_comment.user, :profile_image, :fill, 60, 60 , fallback: "no_image.jpg" %></p>
-  <%= post_comment.user.name %>
-  <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
-  <% if post_comment.user == current_user %>
-  <div>
-    <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+        <p>ユーザーネーム：<%= @post.user.name %></p>
+        <p><%= attachment_image_tag @post.user, :profile_image, :fill, 60, 60 , fallback: "no_image.jpg" %></p>
+      
+        <p>スポット名：<%= @post.title %></p>
+        <p>説明：<%= @post.body %></p>
+      
+        <p>評価</p>
+        <div class="post-evaluation" data-score="<%= @post.evaluation %>"></div>
+        <div class="favorite-btn-<%= @post.id %>"><%= render "user/favorites/favorite-btn", post: @post %></div>
+        <p>コメント件数：<%= @post.post_comments.count %></p>
+        
+      </div>
+      
+       <div class="col-md-4">
+        <p>投稿画像</p>
+        <%= attachment_image_tag @post, :image, :fill, 400, 320 , fallback: "no_image.jpg" %>
+
+      </div>
+    
+      <div class="col-md-4">  
+        <p>地図</p>
+        <div class="show__address"></div>
+        <div class="show__maps" id="show_map" style="height: 320px; width: 400px;"></div>
+        <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+        <% if @post.user == current_user %>
+        <%= link_to "編集", edit_post_path(@post) %>
+        <%= link_to "削除", post_path(@post), method: :delete %>
+        <% end %>
+      </div>
+      </div>
+      
+  <div class="col-md-8 offset-md-1">
+  <h4>コメント</h4>
+
+  <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th></th>
+          <th>ユーザーネーム</th>
+          <th>コメント</th>
+          <th>コメント日</th>
+          <th></th>
+        </tr>
+      </thead>
+    
+        <% @post.post_comments.each do |post_comment| %>
+          <td><%= attachment_image_tag post_comment.user, :profile_image, :fill, 60, 60 , fallback: "no_image.jpg" %></td>
+          <td><%= post_comment.user.name %></td>
+          <td><%= post_comment.comment %></td>
+          <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+          <% if post_comment.user == current_user %>
+          <td><%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %></td>
+          <% end %>
+        <% end %>
+
+
+          <tr>
+            <%= form_with(model:[@post, @post_comment], local: true) do |f| %>
+              <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+              <%= f.submit "送信する" %>
+          <% end %>
+          </tr>
   </div>
-  <% end %>
-<% end %>
-</div>
 
-<td class="favorite-btn-<%= @post.id %>"><%= render "user/favorites/favorite-btn", post: @post %></td>
-
-<div>
-<%= form_with(model:[@post, @post_comment], local: true) do |f| %>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-  <%= f.submit "送信する" %>
-<% end %>
-</div>
+<script>
+  $('.post-evaluation').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>

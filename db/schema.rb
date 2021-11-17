@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_15_100635) do
+ActiveRecord::Schema.define(version: 2021_11_17_085456) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 2021_11_15_100635) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "contacts", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "phone_number", null: false
+    t.integer "subject", default: 0, null: false
+    t.text "message", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -46,16 +56,14 @@ ActiveRecord::Schema.define(version: 2021_11_15_100635) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "evaluation"
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "follow_id"
+    t.integer "follower_id"
+    t.integer "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["follow_id"], name: "index_relationships_on_follow_id"
-    t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
-    t.index ["user_id"], name: "index_relationships_on_user_id"
   end
 
   create_table "spots", force: :cascade do |t|
