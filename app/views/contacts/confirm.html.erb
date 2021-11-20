@@ -5,6 +5,14 @@
       <td><%= @contact.name %></td>
     </tr>
     <tr>
+      <td class="text-center" style="width: 30%;">返信先メールアドレス</td>
+      <td><%= @contact.email %></td>
+    </tr>
+    <tr>
+      <td class="text-center" style="width: 30%;">お電話番号</td>
+      <td><%= @contact.phone_number %></td>
+    </tr>
+    <tr>
       <td class="text-center">メッセージ</td>
       <td style="white-space: pre-wrap;"><%= @contact.message %></td>
     </tr>
@@ -15,7 +23,6 @@
   <%= f.hidden_field :name %>
   <%= f.hidden_field :email %>
   <%= f.hidden_field :phone_number %>
-  <%= f.hidden_field :subject %>
   <%= f.hidden_field :message %>
   <div><%= f.submit '送信' %></div>
 <% end %>
@@ -23,7 +30,6 @@
   <%= f.hidden_field :name %>
   <%= f.hidden_field :email %>
   <%= f.hidden_field :phone_number %>
-  <%= f.hidden_field :subject %>
   <%= f.hidden_field :message %>
   <div><%= f.submit '入力画面に戻る' %></div>
 <% end %>

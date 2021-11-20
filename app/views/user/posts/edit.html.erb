@@ -1,14 +1,24 @@
+<div class='main-container'>
 <h2>投稿編集</h2>
 <%= form_with model:@post, local:true do |f| %>
+<div class="form-group">
   <label for="title">スポット名</label>
   <%= f.text_field :title, autofocus: true, id:"inputTitle", placeholder:"スポット名"%>
+</div>
+
+<div class="form-group">
   <label for="body">説明</label>
   <%= f.text_field :body, autofocus: true, id:"inputBody", placeholder:"説明"%>
-  <div id="evaluate_stars">
-  <label>評価</label>
-  </div>
-  <div class="actions">
+</div>
 
+<div class="form-group">
+  <label for="evaluate_stars">評価</label>
+  <div class="post-evaluation" data-score="<%= @post.evaluation %>"></div>
+</div>
+
+  <%= attachment_image_tag @post, :image, :fill, 400, 320 , fallback: "no_image.jpg"%>
+  <label for="inputImage">投稿画像</label>
+  <%= f.attachment_field :image, placeholder: "投稿画像" %>
 
   <div class="spot">
     <%= f.fields_for :spot do |s| %>
@@ -16,23 +26,20 @@
       <%= s.text_field :address, placeholder: "スポットを入力", id: "address", class: 'spot__text' %>
     <% end %>
     <input onclick="codeAddress()" type="button" value="検索する"></input>
-  <div class="map" id="map" style="height: 320px; width: 640px;"></div>
+  <div class="map" id="show_map" style="height: 320px; width: 400px;"></div>
   </div>
 
-  <h4>画像</h4>
-  <%= f.attachment_field :image %>
-  
   <div class="form-group">
     <%= f.submit "変更を保存" %>
   </div>
 <% end %>
 
-
 <script>
-  $('#evaluate_stars').raty({
-    starOn: "<%= asset_path('star-on.png') %>",
-    starOff: "<%= asset_path('star-off.png') %>",
-    starHalf: "<%= asset_path('star-half.png') %>",
-    scoreName: 'post[evaluation]' //登録するモデル名とカラム名を記述
+  $('.post-evaluation').raty({
+
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
   });
 </script>

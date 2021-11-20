@@ -1,9 +1,13 @@
+/* global google */
+/* global gon */
 let map //変数の定義
 let geocoder //変数の定義
 let marker = []; // マーカーを複数表示させたいので、配列化
 let infoWindow = []; // 吹き出しを複数表示させたいので、配列化
 const spots = gon.all_spots; // コントローラーで定義したインスタンス変数を変数に代入
 const posts = gon.selected_posts
+
+
 
 function initMap(){ //コールバック関数
   geocoder = new google.maps.Geocoder() //GoogleMapsAPIジオコーディングサービスにアクセス
@@ -15,8 +19,8 @@ function initMap(){ //コールバック関数
   }else if(document.getElementById('top_map')){
     // mapの初期位置設定
     map = new google.maps.Map(document.getElementById('top_map'), {
-      center: {lat: -35.6809591, lng: 139.7673068},
-      zoom: 10
+      center: {lat: 35.6594666, lng: 139.7005536},
+      zoom: 13
     });
     // forは繰り返し処理
     // 変数iを0と定義し、

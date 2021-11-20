@@ -1,10 +1,9 @@
- <div class="container px-5 px-sm-5">
+ <div class='main-container'>
     <div class="row">
       <div class="col-md-4">
 
         <p>ユーザーネーム：<%= @post.user.name %></p>
         <p><%= attachment_image_tag @post.user, :profile_image, :fill, 60, 60 , fallback: "no_image.jpg" %></p>
-      
         <p>スポット名：<%= @post.title %></p>
         <p>説明：<%= @post.body %></p>
       
@@ -48,6 +47,7 @@
       </thead>
     
         <% @post.post_comments.each do |post_comment| %>
+        <tr>
           <td><%= attachment_image_tag post_comment.user, :profile_image, :fill, 60, 60 , fallback: "no_image.jpg" %></td>
           <td><%= post_comment.user.name %></td>
           <td><%= post_comment.comment %></td>
@@ -56,6 +56,7 @@
           <td><%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %></td>
           <% end %>
         <% end %>
+        </tr>
 
 
           <tr>

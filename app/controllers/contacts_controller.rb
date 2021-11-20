@@ -1,15 +1,32 @@
 class ContactsController < ApplicationController
-  
+
   def new
     @contact = Contact.new
   end
 
-  # 確認画面を作成する場合はこのような記述になるかと思います。
-  # newアクションから入力内容を受け取り、
-  # 送信ボタンを押されたらcreateアクションを実行します。
+  def index
+    @contacts = Contact.all
+  end
+
+  def show
+    @contact = Contact.find(params[:id])
+  end
+
+  def update
+    @contact = Contact.find(params[:id])
+    # @contact.update(contact_params)
+    # if @contact.contact_status == "未対応"
+    #   @contact.update(contact_status: "未対応")
+    # end
+  end 
+
+
   def confirm
     @contact = Contact.new(contact_params)
-    if @contact.invalid?
+
+    if @contact.valid?
+      render :confirm
+    else
       render :new
     end
   end
@@ -28,12 +45,12 @@ class ContactsController < ApplicationController
   def create
     @contact = Contact.new(contact_params)
     if @contact.save
-      ContactMailer.send_mail(@contact).deliver_now
       redirect_to done_path
     else
       render :new
     end
   end
+
 
   # 送信完了画面を使用する場合お使いください。
   def done
@@ -47,8 +64,10 @@ class ContactsController < ApplicationController
                   :name,
                   :phone_number,
                   :subject,
-                  :message
+                  :message,
+                  :contact_status,
                  )
+                 
   end
 end
 

@@ -2,6 +2,7 @@ class Post < ApplicationRecord
 
   belongs_to :user
   attachment :image
+  belongs_to :genre
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
@@ -11,5 +12,10 @@ class Post < ApplicationRecord
 
   has_one :spot, dependent: :destroy
   accepts_nested_attributes_for :spot
+
+  def self.search(genre_id)
+    #where(["title like? OR body like?", "%#{keyword}%", "%#{keyword}%"])
+    where(genre_id: genre_id)
+  end
 
 end

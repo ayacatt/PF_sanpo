@@ -1,0 +1,17 @@
+<table class="table">
+  <thead>
+      <tr>
+        <th>地域ジャンル</th>
+        <th class="genres-count">登録数: <%= genres.count %></th>
+      </tr>
+  </thead>
+  <tbody>
+    <% genres.each do |genre| %>
+    <tr>
+      <td><%= genre.name %></td>
+      <td><%= link_to '編集',edit_admin_genre_path(genre.id),class: "btn btn-outline-success" %></td>
+    </tr>
+    <% end %>
+  </tbody>
+  <%= paginate @genres %>
+</table>

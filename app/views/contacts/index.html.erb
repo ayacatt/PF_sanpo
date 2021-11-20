@@ -1,0 +1,28 @@
+<div class='main-container'>
+  <div class='row'>
+    <div class='col-md-8 offset-md-1'>
+      <h2>問い合わせ一覧</h2>
+      <table class='table'>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>問い合わせ日時</th>
+            <th>対応ステータス</th>
+            <th></th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @contacts.each do |contact| %>
+            <tr>
+              <td><%= contact.name %></td>
+              <td><%= contact.created_at.strftime('%Y/%m/%d') %></td>
+              <td></td>
+              <td><%= link_to '詳細', contact_path(contact), class: "contact_#{contact.id}" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
