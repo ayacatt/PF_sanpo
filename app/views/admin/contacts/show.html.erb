@@ -1,15 +1,16 @@
  <div class='main-container'>
     <div class="row">
       <div class="col-md-4">
-　　　
+
         <p>氏名：<%= @contact.name %></p>
         <p>メールアドレス：<%= @contact.email %></p>
         <p>電話番号：<%= @contact.phone_number %></p>
         <p>問い合わせ内容：<%= @contact.message %></p>
-        <p>問い合わせ日時：<%= @contact.created_at.strftime('%Y/%m/%d') %></p>
-        
+        <p>問い合わせ日時：<%= @contact.created_at.strftime('%Y/%m/%d/%T') %></p>
+
         <th>対応ステータス</th>
-          <%= form_with model: @contact, url: contact_path(@contact.id), local: true do |f| %>
-          <th><%= f.select :contact_status, [["未対応"],["対応中"],["対応完了"]] %>
+          <%= form_with model: @contact, url: admin_contact_path(@contact.id), local: true do |f| %>
+          <th>
+          <%= f.select :contact_status, Contact.contact_statuses.keys.map {|k| [I18n.t("enums.contact.contact_status.#{k}"), k]} , { class: 'form-control' , required: true } %>
           <%= f.submit "更新", class: "btn btn-outline-dark" %></th>
          <% end %>

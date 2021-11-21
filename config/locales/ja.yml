@@ -1,0 +1,7 @@
+  ja:
+    enums:
+      contact:
+        contact_status:
+          unsupported: "未対応"
+          support: "対応中"
+          complete: "対応完了"

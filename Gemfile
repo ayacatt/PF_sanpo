@@ -76,6 +76,7 @@ gem "gmaps4rails"
 gem "geocoder"
 gem "gon"
 gem 'font-awesome-sass', '~> 5.13'
+gem "enum_help"
 group :production do
   gem 'mysql2'
 end

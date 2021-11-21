@@ -13,22 +13,19 @@ Rails.application.routes.draw do
     sessions: "admin/sessions"
   }
 
-    resources :contacts, only: [:new, :create, :index, :show, :update]
-    post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'
-    post 'contacts/back', to: 'contacts#back', as: 'back'
-    get 'done', to: 'contacts#done', as: 'done'
-
     resources :relationships, only: [:create, :destroy]
-
     get 'search' => 'user/posts#search'
     
 
   scope module: :user do
     root to: "homes#top"
     get "/about" => "homes#about"
-
     resources :maps, only: [:index]
     resources :users, only: [:index, :show, :edit, :update]
+    resources :contacts, only: [:new, :create]
+    post 'contacts/confirm', to: 'contacts#confirm', as: 'confirm'
+    post 'contacts/back', to: 'contacts#back', as: 'back'
+    get 'done', to: 'contacts#done', as: 'done'
     resources :posts, only: [:new, :create, :edit, :index, :show, :destroy, :update] do
       resource :favorites, only: [:create, :destroy]
      resources :post_comments, only: [:create, :destroy]
@@ -39,5 +36,6 @@ Rails.application.routes.draw do
    get "homes/top" => "homes#top"
    resources :genres
    resources :users
+   resources :contacts, only: [:index, :show, :update]
   end
 end
