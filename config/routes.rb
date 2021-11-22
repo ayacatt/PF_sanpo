@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
     resources :relationships, only: [:create, :destroy]
     get 'search' => 'user/posts#search'
-    
+
 
   scope module: :user do
     root to: "homes#top"

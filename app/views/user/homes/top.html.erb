@@ -1,22 +1,31 @@
 <div class='main-container'>
   <div class='row'>
-    <div class="col-md-2">
-        <h5>新着投稿</h5>
-        <% @posts.each do |post| %>
-          <div class="card mb-2">
-            <%= link_to post_path(post.id) do %>
-              <%= attachment_image_tag post, :image, format: 'jpg' , fallback: "no_image.jpg", size: "200x180" , class:"card-img-top" %>
-            <% end %>
-          <div class="card-body">
-            <p class="card-text">
-          　<p>スポット名：<%= post.title %></p>
-            <p>説明：<%= post.body %></p>
-            <p>評価：<div class="post-evaluation" data-score="<%= post.evaluation %>"></div></p>
-          </div>
-          </div>
-        <% end %>
+    <div class="col-md-3">
+      <div class = top >
+        <div class = top_title>新着投稿</div>
+          <% @posts.each do |post| %>
+            <div class = box >
+              <%= link_to post_path(post.id) do %>
+                <%= attachment_image_tag post, :image, format: 'jpg' , fallback: "no_image.jpg", size: "200x180" , class:"card-img-top" %>
+              <div class = layout>
+                <div class = eyecatche>
+                  <div class = box_user.img>
+                      <%= attachment_image_tag post.user, :profile_image, :fill, 60, 60 , fallback: "no_image.jpg" %>
+                    <% end %>
+                  </div>
+                </div>
+                <div class = box_text>
+                　<div class = box_text_title><%= post.title %></div>
+                  <div class="post-evaluation" data-score="<%= post.evaluation %>">評価：</div>
+                  <div class = box_text_body>説明：<%= post.body %></div>
+                  <div class = box_text_body>投稿日：<%= post.created_at.strftime('%Y/%m/%d') %></div>
+                </div>  
+              </div>
+            </div>
+          <% end %>
+      </div>
     </div>
-
+      
     <div class="col-md-6">
       <div id='top_map'></div>
     </div>
@@ -25,7 +34,7 @@
 
 <style>
 #top_map{
-    height: 1200px;
+    height: 900px;
     width: 1100px;
 }
 </style>

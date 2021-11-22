@@ -12,17 +12,17 @@
 
     <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['SECRET_KEY'] %>&callback=initMap" async defer></script>
     <script src="//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"></script>
-
   </head>
 
-  <header>
+  <body>
     <% if request.fullpath.include?("admin") %>
     <%= render 'layouts/header_admin' %>
     <% else %>
     <%= render "layouts/header_user" %>
     <% end %>
-  </header>
 
     <%= yield %>
+    
+    <%= render 'layouts/footer' %>
   </body>
 </html>

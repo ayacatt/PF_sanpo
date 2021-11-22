@@ -8,26 +8,23 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
-    <% if admin_signed_in? %>
-      <li class="nav-item">
-        <%= link_to 'ユーザ一覧　', admin_users_path %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'ジャンル一覧　', admin_genres_path %>
-      </li>
-      <li class="nav-item">
-        <%= link_to '問い合わせ一覧　', admin_contacts_path %>
-      </li>
-      <li class="nav-item">
-        <%= link_to 'ログアウト ', destroy_admin_session_path, method: :delete %>
-      </li>
+              <% if admin_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to '市区町村登録　', admin_genres_path %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to '問い合わせ一覧　', admin_contacts_path %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'ログアウト ', destroy_admin_session_path, method: :delete %>
+                </li>
 
-    <% else %>
-      <li class="nav-item">
-        <%= link_to 'ログイン ', new_admin_session_path %>
-      </li>
-    <% end %>
-                </ul>
+              <% else %>
+                <li class="nav-item">
+                  <%= link_to 'ログイン ', new_admin_session_path %>
+                </li>
+              <% end %>
+            </ul>
           </div>
         </div>
       </nav>

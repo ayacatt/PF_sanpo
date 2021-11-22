@@ -1,42 +1,57 @@
 <div class='main-container'>
-<h1>スポット投稿フォーム</h1>
+  <div class='row'>
+    <div class='col-md-8 offset-md-1'>
+      <div class=main-subject>スポット投稿フォーム</div>
 
-  </tr>
-  <%= form_with model: @post, local:true, multipart: true do |f| %>
+      <%= form_with model: @post, local:true, multipart: true do |f| %>
+    
+      <div class="form-group">
+        <%= f.label :genre, "ジャンル" %>
+        <%= f.collection_select(:genre_id, Genre.all, :id, :name, prompt: "-- 選択してください --") %>
+      </div>
 
-  <h4><%= f.label :genre, "ジャンル" %></h4>
-  <%= f.collection_select(:genre_id, Genre.all, :id, :name, prompt: "-- 選択してください --") %>
+      <div class="form-group">
+        <%= f.label :title, 'スポット名' %>
+        <%= f.text_field :title, autofocus: true, class: 'form-control' %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :body, '説明' %>
+        <%= f.text_field :body, autofocus: true, class: 'form-control' %>
+      </div>
 
-  <h4>スポット名</h4>
-  <%= f.text_field :title %>
-  <h4>説明</h4>
-  <%= f.text_area :body %>
+      <div id="evaluate_stars">
+        <label>評価</label>
+      </div>
 
-  <div id="evaluate_stars">
-  <label>評価</label>
+      <div class="form-group">
+        <%= f.label :image, 'スポット画像' %>
+        <%= f.attachment_field :image %>
+      </div>
+
+      <h6>地図</h6>
+        <div class="spot">
+        <%= f.fields_for :spot do |s| %>
+          <%= s.label :address, "レビュー場所(Google Mapで検索)", class: 'spot__title' %>
+          <%= s.text_field :address, placeholder: "スポットを入力", id: "address", class: 'spot__text' %>
+        <% end %>
+        <input onclick="codeAddress()" type="button" value="検索する"></input>
+        <div class="map" id="map" style="height: 320px; width: 640px;"></div>
+        <br>
+        <div>
+          <%= f.submit "投稿する" %>
+        </div>
+　　  <% end %>
+    </div>
   </div>
-
-  <h4>スポット画像</h4>
-  <%= f.attachment_field :image %>
-
-  <h4>地図</h4>
-    <div class="spot">
-    <%= f.fields_for :spot do |s| %>
-      <%= s.label :address, "レビュー場所(Google Mapで検索)", class: 'spot__title' %>
-      <%= s.text_field :address, placeholder: "スポットを入力", id: "address", class: 'spot__text' %>
-    <% end %>
-    <input onclick="codeAddress()" type="button" value="検索する"></input>
-    <div class="map" id="map" style="height: 320px; width: 640px;"></div>
-  　</div>
-
-  <%= f.submit "投稿する" %>
-<% end %>
+</div>
+</div>
 
 <script>
   $('#evaluate_stars').raty({
     starOn: "<%= asset_path('star-on.png') %>",
     starOff: "<%= asset_path('star-off.png') %>",
     starHalf: "<%= asset_path('star-half.png') %>",
-    scoreName: 'post[evaluation]' //登録するモデル名とカラム名を記述
+    scoreName: 'post[evaluation]' 
   });
 </script>

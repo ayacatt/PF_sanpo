@@ -21,3 +21,68 @@
   margin: 30px 50px;
 
 }
+
+ .main-subject {
+  margin: 30px 50px;
+  font-size: 30px;
+
+}
+
+.top {
+ background: #f4f4f4;
+}
+
+.top_title {
+  text-align: center;
+  font-size: 30px;
+}
+
+.box {
+  margin: 10px 5px 10px 5px;
+
+}
+
+.layout {
+ display: flex;
+ margin: 0 10px 0 0;
+}
+.eyecatche {
+ flex: 0 0 40px;
+ margin: 15px 5px 15px 5px;
+}
+
+.box_user.img {
+ width: 100%;
+}
+
+.box_user.img:before{
+ content: "";
+ display: block;
+ width: 100%;
+ padding-top: 100%;
+}
+
+.box_text {
+ flex: auto;
+ // min-width: 10PX;
+
+}
+
+.box_text_title {
+ font-size: 15px;
+}
+
+.post-evaluation {
+ font-size: 13px;
+}
+
+.box_text_body {
+ font-size: 12px;
+}
+
+
+ .footer {
+  width: 100%;
+  background: #dcd0c0;
+
+ }
