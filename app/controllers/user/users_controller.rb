@@ -1,24 +1,24 @@
 class User::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_correct_user, only: [:edit, :update]
-  
+  before_action :ensure_correct_user, only: %i[edit update]
+
   def index
     @users = User.all
   end
-  
+
   def show
-     @user = User.find(params[:id])
-     @posts = @user.posts.page(params[:page]).reverse_order
+    @user = User.find(params[:id])
+    @posts = @user.posts.page(params[:page]).reverse_order
   end
-  
+
   def edit
     @user = User.find(params[:id])
   end
-  
+
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
-    redirect_to user_path(@user.id) 
+    redirect_to user_path(@user.id)
   end
 
   private
@@ -29,8 +29,6 @@ class User::UsersController < ApplicationController
 
   def ensure_correct_user
     @user = User.find(params[:id])
-    unless @user == current_user
-      redirect_to user_path(current_user)
-    end
+    redirect_to user_path(current_user) unless @user == current_user
   end
 end

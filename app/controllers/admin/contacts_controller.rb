@@ -11,18 +11,15 @@ class Admin::ContactsController < ApplicationController
     @contacts = Contact.all
     @contact = Contact.find(params[:id])
     @contact.update(contact_params)
-      render :index
-  end 
-  
+    render :index
+  end
+
   def contact_params
     params.require(:contact)
           .permit(:email,
                   :name,
                   :phone_number,
                   :message,
-                  :contact_status,
-                 )
-                 
+                  :contact_status)
   end
-  
 end

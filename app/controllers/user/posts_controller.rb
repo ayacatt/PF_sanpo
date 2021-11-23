@@ -1,5 +1,4 @@
 class User::PostsController < ApplicationController
-
   def new
     @post = Post.new
     @post.build_spot
@@ -58,7 +57,7 @@ class User::PostsController < ApplicationController
     @genres = Genre.all
     @posts = Post.search(params[:genre_id])
     @keyword = params[:genre_id]
-    render "index"
+    render 'index'
   end
 
   private
@@ -66,7 +65,4 @@ class User::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:title, :image, :body, :genre_id, :evaluation, spot_attributes: [:address])
   end
-
 end
-
-

@@ -1,0 +1,55 @@
+  require:
+    - rubocop-rails
+
+  inherit_from: .rubocop_todo.yml
+
+  Bundler/DuplicatedGem:
+  Exclude:
+    - 'Gemfile'
+
+  Bundler/OrderedGems:
+    Exclude:
+      - 'Gemfile'
+
+  Metrics/BlockLength:
+    Max: 29
+
+  Metrics/MethodLength:
+    Max: 11
+
+  Rails/FilePath:
+    Exclude:
+      - 'config/environments/development.rb'
+      - 'config/puma.rb'
+
+  Rails/HasManyOrHasOneDependent:
+    Exclude:
+      - 'app/models/genre.rb'
+
+  Rails/InverseOf:
+    Exclude:
+      - 'app/models/user.rb'
+
+  Style/ClassAndModuleChildren:
+    Enabled: false
+
+  Style/Documentation:
+    Enabled: false
+
+  Style/FrozenStringLiteralComment:
+    Enabled: false
+
+  Style/GlobalStdStream:
+    Exclude:
+      - 'config/environments/production.rb'
+
+  Style/GuardClause:
+    Exclude:
+      - 'app/controllers/admin/genres_controller.rb'
+
+  Style/RedundantFetchBlock:
+    Exclude:
+      - 'config/puma.rb'
+
+  Layout/LineLength:
+    Max: 154

@@ -1,5 +1,5 @@
 class Admin::GenresController < ApplicationController
-    before_action :authenticate_admin!
+  before_action :authenticate_admin!
 
   def show
     @genre = Genre.find(params[:id])
@@ -18,8 +18,8 @@ class Admin::GenresController < ApplicationController
   def create
     @genre = Genre.new(genre_params)
     if @genre.save
-    @genres = Genre.page(params[:page]).per(10)
-    redirect_to admin_genres_path
+      @genres = Genre.page(params[:page]).per(10)
+      redirect_to admin_genres_path
     end
   end
 
@@ -28,7 +28,7 @@ class Admin::GenresController < ApplicationController
     if @genre.update(genre_params)
       redirect_to admin_genres_path
     else
-      render "edit"
+      render 'edit'
     end
   end
 
@@ -39,6 +39,7 @@ class Admin::GenresController < ApplicationController
   end
 
   private
+
   def genre_params
     params.require(:genre).permit(:name)
   end

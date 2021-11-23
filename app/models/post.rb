@@ -1,11 +1,9 @@
 class Post < ApplicationRecord
-
   belongs_to :user
   attachment :image
   belongs_to :genre
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
-
 
   validates :title, presence: true
   validates :body, presence: true
@@ -21,5 +19,4 @@ class Post < ApplicationRecord
   def self.search(genre_id)
     where(genre_id: genre_id)
   end
-
 end

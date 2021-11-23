@@ -86,6 +86,10 @@ function codeAddress(){ //コールバック関数
       });
     } else {
       alert('該当する結果がありませんでした');
+
+    // } else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) {
+    //     wait = true;
+    //     setTimeout("wait = true", 1400);
     }
   });
 }

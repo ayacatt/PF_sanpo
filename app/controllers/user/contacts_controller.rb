@@ -1,5 +1,4 @@
 class User::ContactsController < ApplicationController
-
   def new
     @contact = Contact.new
   end
@@ -28,8 +27,7 @@ class User::ContactsController < ApplicationController
     end
   end
 
-  def done
-  end
+  def done; end
 
   private
 
@@ -39,9 +37,6 @@ class User::ContactsController < ApplicationController
                   :name,
                   :phone_number,
                   :message,
-                  :contact_status,
-                 )
-                 
+                  :contact_status)
   end
 end
-
