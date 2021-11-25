@@ -5,21 +5,21 @@
       <%= f.label :title, 'スポット名' %>
       <%= f.text_field :title, autofocus: true, id:"inputTitle", placeholder:"スポット名"%>
     </div>
-    
+
     <div class="form-group">
       <%= f.label :body, '説明' %>
       <%= f.text_field :body, autofocus: true, id:"inputBody", placeholder:"説明"%>
     </div>
-    
+
     <div class="form-group">
       <%= f.label :evaluate_stars, '評価' %>
       <div class="post-evaluation" data-score="<%= @post.evaluation %>"></div>
     </div>
-    
+
     <%= attachment_image_tag @post, :image, :fill, 400, 320 , fallback: "no_image.jpg"%>
     <label for="inputImage">投稿画像</label>
     <%= f.attachment_field :image, placeholder: "投稿画像" %>
-    
+
     <div class="spot">
       <%= f.fields_for :spot do |s| %>
         <%= s.label :address, "レビュー場所(Google Mapで検索)", class: 'spot__title' %>
@@ -36,10 +36,12 @@
 
 <script>
   $('.post-evaluation').raty({
-
+    readOnly: true,
+    starOn: "<%= asset_path('star-on.png') %>",
+    starhalf: "<%= asset_path('star-half.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
     score: function() {
       return $(this).attr('data-score');
-    },
-    path: '/assets/'
+    }
   });
 </script>
