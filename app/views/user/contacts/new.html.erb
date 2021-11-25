@@ -1,6 +1,6 @@
 <div class='main-container'>
   <div class='row'>
-    <div class='col-md-8 offset-md-1'>
+    <div class='col-md-5 offset-md-1'>
       <%= form_with model: @contact, url: confirm_path, local: true do |f| %>
       <div class="form-group">
         <%= f.label :name, 'お名前*' %>
@@ -20,7 +20,7 @@
       </div>
     
       <div>
-        <%= f.submit '入力内容確認' %>
+        <%= f.submit '入力内容確認', class:"btn btn-outline-secondary" %>
       </div>
     <% end %>
     </div>

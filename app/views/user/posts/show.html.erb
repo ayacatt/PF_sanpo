@@ -3,7 +3,7 @@
     <div class='row'>
       <div class='col-md-3'>
 
-        <p><%= attachment_image_tag @post.user, :profile_image, :fill, 100, 100 , fallback: "no_image.jpg" %></p>
+        <p><%= attachment_image_tag @post.user, :profile_image, :fill, 100, 100 , fallback: "no_image.jpg", class:"mt-3 rounded-circle" %></p>
         <p>投稿ユーザ：<%= @post.user.name %></p>
         <p>スポット名：<%= @post.title %></p>
         <p>説明：<%= @post.body %></p>
@@ -28,7 +28,7 @@
         <p>地図</p>
         <div class="show__address"></div>
         <div class="show__maps" id="show_map" style="height: 320px; width: 400px;"></div>
-        <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d/%T') %></p>
+        <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d %T') %></p>
         <% if @post.user == current_user %>
         <%= link_to "編集", edit_post_path(@post), class:"btn btn-outline-secondary" %>
         <%= link_to "削除", post_path(@post), method: :delete, class:"btn btn-outline-danger" %>
@@ -44,7 +44,7 @@
             <th></th>
             <th>ユーザーネーム</th>
             <th>コメント</th>
-            <th>コメント日</th>
+            <th>コメント日時</th>
             <th></th>
           </tr>
         </thead>
@@ -55,7 +55,7 @@
             <td><%= attachment_image_tag post_comment.user, :profile_image, :fill, 60, 60 , fallback: "no_image.jpg" %></td>
             <td><%= post_comment.user.name %></td>
             <td><%= post_comment.comment %></td>
-            <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= post_comment.created_at.strftime('%Y/%m/%d %T') %></td>
             <% if post_comment.user == current_user %>
             <td><%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete, class:"btn btn-outline-danger" %></td>
             <% end %>

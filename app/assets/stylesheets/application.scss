@@ -18,13 +18,13 @@
  @import 'font-awesome';
 
  .main-container {
-  margin: 30px 50px;
+  margin: 10px 50px;
 
 }
 
  .main-subject {
-  margin: 30px 50px;
-  font-size: 30px;
+  margin: 5px 50px;
+  font-size: 25px;
 
 }
 
@@ -53,6 +53,7 @@
 
 .box_user.img {
  width: 100%;
+
 }
 
 .box_user.img:before{
@@ -86,6 +87,8 @@
   background: #dcd0c0;
 
  }
- 
-body {
-  background-image: image-url("no_image.jpg");}
+
+ body {
+  attachment_image_tag: image-url("no_image.jpg");
+  image_tag: image-url("logo.jpg");
+ }

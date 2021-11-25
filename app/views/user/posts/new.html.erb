@@ -1,6 +1,6 @@
 <div class='main-container'>
   <div class='row'>
-    <div class='col-md-8 offset-md-1'>
+    <div class='col-md-5 offset-md-1'>
       <div class=main-subject>スポット投稿フォーム</div>
 
       <%= form_with model: @post, local:true, multipart: true do |f| %>
@@ -29,17 +29,16 @@
         <%= f.attachment_field :image %>
       </div>
 
-      <h6>地図</h6>
         <div class="spot">
         <%= f.fields_for :spot do |s| %>
           <%= s.label :address, "レビュー場所(Google Mapで検索)", class: 'spot__title' %>
-          <%= s.text_field :address, placeholder: "スポットを入力", id: "address", class: 'spot__text' %>
+          <%= s.text_field :address, placeholder: "スポットを入力", id: "address", class: 'form-control' %>
         <% end %>
         <input onclick="codeAddress()" type="button" value="検索する"></input>
         <div class="map" id="map" style="height: 320px; width: 640px;"></div>
         <br>
         <div>
-          <%= f.submit "投稿する" %>
+          <%= f.submit "投稿する",class: 'btn btn-outline-success' %>
         </div>
 　　  <% end %>
     </div>
