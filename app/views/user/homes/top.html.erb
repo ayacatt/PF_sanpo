@@ -20,15 +20,15 @@
                   <div class="post-evaluation" data-score="<%= post.evaluation %>">評価：</div>
                   <div class = box_text_body>説明：<%= post.body %></div>
                   <div class = box_text_body>投稿日：<%= post.created_at.strftime('%Y/%m/%d %T') %></div>
-                </div>  
+                </div>
               </div>
             </div>
            </div>
           <% end %>
-       
+
       </div>
     </div>
-      
+
     <div class="col-md-6">
       <div id='top_map'></div>
     </div>
@@ -43,12 +43,24 @@
 </style>
 
 
+
+  <!--// $('.post-evaluation').raty({-->
+  <!--//   readOnly: true,-->
+  <!--//   score: function() {-->
+  <!--//     return $(this).attr('data-score');-->
+  <!--//   },-->
+  <!--//   path: '/assets/'-->
+  <!--// });-->
+
+
 <script>
-  $('.post-evaluation').raty({
+  $('.review-rating').raty({
     readOnly: true,
+    starOn: "<%= asset_path('star-on.png') %>",
+    starhalf: "<%= asset_path('star-half.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
     score: function() {
       return $(this).attr('data-score');
-    },
-    path: '/assets/'
+    }
   });
 </script>
