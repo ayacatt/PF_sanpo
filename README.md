@@ -4,7 +4,7 @@
 GoogleAPIのMapを用い、散歩コースを提示でき、合わせて、ユーザーが地域の名所を画像投稿、評価できるアプリケーション。 
 在宅勤務や非接触がキーワードとなり運動不足の人が多く、少しの隙間時間でも自分の住んでいる地域を散歩し、 
 名所を投稿することで外に出る楽しさや意味を見つけてもらい、また散歩をしたいユーザーはその投稿、
-名所の評価を参考にして 散歩コースを決めることができるアプリケーションです。
+名所の評価を参考にできるアプリケーションです。
 
 
 
@@ -25,14 +25,6 @@ GoogleAPIのMapを用い、散歩コースを提示でき、合わせて、ユ�
 様々な移動時
 
 ## 設計書
-・ER図
-githubを参照ください
-
-・テーブル定義書
-https://docs.google.com/spreadsheets/d/1vYNSXuYueq7Ub2VoulOLz2eYWQmSQf9w/edit?rtpof=true#gid=805319813
-
-・アプリケーション詳細設計書
-https://docs.google.com/spreadsheets/d/1_zT8WYLZ9cV2KHp0ts06psNY8sQqTl3we9-eddyDlJA/edit#gid=2133469642
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/10B0ax9xNFk7KhhmPN0Xw58RcI1hk12TbT_8GtvsBcsk/edit#gid=0
